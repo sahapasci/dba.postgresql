@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION sp_blocked_query (
+CREATE OR REPLACE FUNCTION dba.sp_blocked_query (
   g_blocked_pid integer,
   out blocked_pid integer,
   out blocked_user varchar,
@@ -81,7 +81,7 @@ BEGIN
 
     IF FOUND THEN
       RETURN NEXT;
-      RETURN QUERY SELECT * FROM sp_blocked_query(blocking_pid);
+      RETURN QUERY SELECT * FROM dba.sp_blocked_query(blocking_pid);
     END IF;
     
 END;
