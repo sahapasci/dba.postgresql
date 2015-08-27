@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dba.sp_copy_priviledges (
+CREATE OR REPLACE FUNCTION dba.sp_copy_table_priviledges (
   i_from_schema varchar,
   i_from_table varchar,
   i_to_schema varchar,
