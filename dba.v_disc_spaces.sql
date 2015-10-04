@@ -2,9 +2,9 @@ CREATE OR REPLACE VIEW dba.v_disc_spaces AS
 SELECT
     t.schemaname,
     t.tablename,
-    pg_relation_size('"' || t.schemaname || '"."' || t.tablename || '"') AS tablo_disk_boyutu,
+    pg_table_size('"' || t.schemaname || '"."' || t.tablename || '"') AS table_disc_size,
     NULL as index,
-    0 as index_disc_boyutu,
+    0 as index_disc_size,
     t.tablespace
   FROM pg_tables t
 
