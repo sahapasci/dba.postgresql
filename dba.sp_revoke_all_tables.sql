@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION dba.sp_revoke_to_all_tables (
+CREATE OR REPLACE FUNCTION dba.sp_revoke_all_tables (
   i_role_name VARCHAR,
   i_privilege VARCHAR = 'ALL',
   i_schema_name VARCHAR = 'public'

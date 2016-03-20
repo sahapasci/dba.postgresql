@@ -15,7 +15,7 @@ BEGIN
   IF i_revoke_previous THEN
     FOR sql IN 
       SELECT 
-          'REVOKE ' || string_agg(tg.privilege_type, ', ') || ' ON ' || tg.table_schema || '.'|| tg.table_name || ' FROM ' || tg.grantee || ';' 
+          'REVOKE ' || string_agg(tg.privilege_type, ', ') || ' ON "' || tg.table_schema || '"."'|| tg.table_name || '" FROM "' || tg.grantee || '";' 
         FROM information_schema.role_table_grants tg
         WHERE 
           tg.table_schema = i_to_schema AND
@@ -31,7 +31,7 @@ BEGIN
 
   FOR sql IN 
     SELECT 
-        'GRANT ' || string_agg(tg.privilege_type, ', ') || ' ON ' || i_to_schema || '.'|| i_to_table || ' TO ' || tg.grantee || ';' 
+        'GRANT ' || string_agg(tg.privilege_type, ', ') || ' ON "' || i_to_schema || '"."'|| i_to_table || '" TO "' || tg.grantee || '";' 
       FROM information_schema.role_table_grants tg
       WHERE 
         tg.table_schema = i_from_schema AND
@@ -45,7 +45,7 @@ BEGIN
     END LOOP;
     
   SELECT 
-      'ALTER TABLE ' || i_to_schema || '.' || i_to_table || ' OWNER TO '|| t.tableowner || ';'
+      'ALTER TABLE "' || i_to_schema || '"."' || i_to_table || '" OWNER TO "'|| t.tableowner || '";'
     INTO
       sql
     FROM pg_tables t
