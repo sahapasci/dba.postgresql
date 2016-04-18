@@ -12,6 +12,7 @@ BEGIN
     FROM pg_stat_activity sa
     WHERE 
       sa.state = 'active' AND 
+      sa.waiting = FALSE AND
       sa.state_change < now() -  ('5' ||' minutes')::INTERVAL;
 END;
 $body$
